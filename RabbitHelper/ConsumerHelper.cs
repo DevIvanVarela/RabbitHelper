@@ -8,14 +8,8 @@ using System.Text;
 
 namespace RabbitHelper
 {
-    public class Helper
+    public class ConsumerHelper
     {
-        public static void DeclareQueues(IModel channel)
-        {
-            foreach (var queue in Assembly.GetEntryAssembly().GetTypes().Where(mytype => mytype.GetInterfaces().Contains(typeof(IEvent))).Select(x => x.Name))
-                channel.QueueDeclare(queue, true, false, false, null);
-        }
-
         public static void RegisterConsumers(IModel channel)
         {
             foreach (var method in GetConsumerMethods())
@@ -23,7 +17,7 @@ namespace RabbitHelper
                 var parameter = method.GetParameters().FirstOrDefault();
 
                 var basicConsumer = new EventingBasicConsumer(channel);
-                basicConsumer.Received += Consumer_Received;
+                basicConsumer.Received += ConsumerReceived;
                 channel.BasicConsume(parameter.ParameterType.Name, true, basicConsumer);
             }
         }
@@ -37,7 +31,7 @@ namespace RabbitHelper
                 .SelectMany(x => x.GetMethods().Where(x => x.IsPublic && x.Name == "Consume"));
         }
 
-        private static void Consumer_Received(object sender, BasicDeliverEventArgs e)
+        private static void ConsumerReceived(object sender, BasicDeliverEventArgs e)
         {
             foreach (var method in GetConsumerMethods())
             {

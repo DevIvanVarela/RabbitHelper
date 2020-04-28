@@ -4,9 +4,9 @@ using System.Text;
 
 namespace RabbitHelper
 {
-    public class Publisher : IPublisher
+    public class PublisherHelper : IPublisher
     {
-        public Publisher(IModel channel)
+        public PublisherHelper(IModel channel)
         {
             _channel = channel;
         }

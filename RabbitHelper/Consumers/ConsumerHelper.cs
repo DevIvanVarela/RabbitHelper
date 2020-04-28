@@ -27,8 +27,8 @@ namespace RabbitHelper.Consumers
             return Assembly
                 .GetEntryAssembly()
                 .GetTypes()
-                .Where(mytype => mytype.GetInterfaces().Contains(typeof(IConsume)) && mytype.IsClass)
-                .SelectMany(x => x.GetMethods().Where(x => x.IsPublic && x.Name == "Consume"));
+                .Where(mytype => mytype.GetInterfaces().Contains(typeof(IConsumer)) && mytype.IsClass)
+                .SelectMany(x => x.GetMethods().Where(x => x.Name == "Consume"));
         }
 
         private static void ConsumerReceived(object sender, BasicDeliverEventArgs e)

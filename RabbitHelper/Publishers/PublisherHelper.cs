@@ -22,5 +22,23 @@ namespace RabbitHelper.Publishers
                 basicProperties: null,
                 body: Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message)));
         }
+
+        public void Publish<T>(T message, string exchange) where T : IEvent
+        {
+            _channel.BasicPublish(
+                exchange: exchange,
+                routingKey: typeof(T).Name,
+                basicProperties: null,
+                body: Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message)));
+        }
+
+        public void Publish<T>(T message, string exchange, IBasicProperties basicProperties) where T : IEvent
+        {
+            _channel.BasicPublish(
+                exchange: exchange,
+                routingKey: typeof(T).Name,
+                basicProperties: basicProperties,
+                body: Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message)));
+        }
     }
 }

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace RabbitHelper
+namespace RabbitHelper.Consumers
 {
     public class ConsumerHelper
     {

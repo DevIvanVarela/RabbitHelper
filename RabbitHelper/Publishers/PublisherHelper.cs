@@ -1,8 +1,9 @@
 ﻿using Newtonsoft.Json;
+using RabbitHelper.Events;
 using RabbitMQ.Client;
 using System.Text;
 
-namespace RabbitHelper
+namespace RabbitHelper.Publishers
 {
     public class PublisherHelper : IPublisher
     {

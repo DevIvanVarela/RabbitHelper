@@ -1,4 +1,4 @@
-﻿namespace RabbitHelper
+﻿namespace RabbitHelper.Events
 {
     public interface IEvent
     {

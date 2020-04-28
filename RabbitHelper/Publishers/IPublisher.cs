@@ -1,4 +1,6 @@
-﻿namespace RabbitHelper
+﻿using RabbitHelper.Events;
+
+namespace RabbitHelper.Publishers
 {
     public interface IPublisher
     {
